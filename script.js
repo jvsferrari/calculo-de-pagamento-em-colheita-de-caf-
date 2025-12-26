@@ -1,6 +1,6 @@
 const DATABANK_NAME = "allData" 
 const nameField = document.getElementById("name");
-const pricePerField = document.getElementById("price");
+const pricePerField = document.getElementById("pricePer");
 const latoesField = document.getElementById("latoes");
 const litersField = document.getElementById("liters");
 
@@ -21,16 +21,16 @@ function addName(){
         nameTyped = "Nome não inserido"
     }
 
-    const table = readDatabase()
+    const list = readDatabase()
 
-    table.push({
+    list.push({
         names: nameTyped,
         pricePer: 0,
         latoes: 0,
         liters: 0
     });
 
-    saveData(table)
+    saveData(list)
 }
 
 function getNumber(event, field, number){
@@ -43,13 +43,13 @@ function getNumber(event, field, number){
 
     const number = parseInt(field.value);
 
-    const table = readDatabase()
+    const list = readDatabase()
 
-    const lastPerson = data[data.length - 1];
+    const lastPerson = list[list.length - 1];
 
     lastPerson[number] = parseInt(number)
 
-    saveData(table)
+    saveData(list)
 }
 
 function calculateCost(priceTyped, latoesTyped, litersTyped){
@@ -58,7 +58,7 @@ function calculateCost(priceTyped, latoesTyped, litersTyped){
     const litersTyped = parseInt(litersField.value);
     costCalculated = priceTyped/60 * (latoesTyped * 60 + litersTyped)
 
-    table.push({
+    list.push({
         costColumn: costCalculated
     })
 
