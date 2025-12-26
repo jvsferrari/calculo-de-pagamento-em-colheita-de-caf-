@@ -13,7 +13,7 @@ function saveData(list) {
     localStorage.setItem(data, JSON.stringify(list));
 }
 
-function addName(nameField){
+function addName(){
 
     const nameTyped = nameField.value
 
@@ -57,8 +57,6 @@ function calculateCost(priceTyped, latoesTyped, litersTyped){
     const latoesTyped = parseInt(latoesField.value);
     const litersTyped = parseInt(litersField.value);
     costCalculated = priceTyped/60 * (latoesTyped * 60 + litersTyped)
-    
-    if (isNaN(pricePerTyped)||isNaN(latoesTyped)||)
 
     table.push({
         costColumn: costCalculated
