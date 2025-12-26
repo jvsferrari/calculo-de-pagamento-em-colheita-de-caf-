@@ -4,6 +4,14 @@ const pricePerField = document.getElementById("pricePer");
 const latoesField = document.getElementById("latoes");
 const litersField = document.getElementById("liters");
 
+function type(key, field){
+    field.value = field.value + key 
+}
+
+function erase(field){
+    const textNow = field.value
+    field.value = textNow.slice(0, -1)
+}
 
 function readDatabase(){
     return JSON.parse(localStorage.getItem(DATABANK_NAME)) || [];
