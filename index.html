@@ -11,12 +11,17 @@
 <body>
     <h1>Calcular pagamento de panhadores</h1>
     <form>
-        <label for="name">Nome do panhador</label>
-        <input id="name" type="text" style="margin: 2em; display: block;">
+        <label style="display: block;" for="name">Nome do panhador</label>
+        <input id="name" type="text" style="margin: 1em auto; display: block;">
     </form>
-    <div>
+    <div style="display: flex; justify-content: space-around;">
         <a id="skip" href="pricePer.html" onclick="addName()"><i class="fa-solid fa-forward"></i></a>
         <a id="nameDone" href="pricePer.html" onclick="addName()"><i class="fa-solid fa-check"></i></a>
+    </div>
+        <div style="display: flex; justify-content: space-around;">
+        <p>Pular</p>
+        <p>Pronto</p>
+        </div>
     </div>
     
     <script src="script.js"></script>
