@@ -86,28 +86,34 @@ p{
     margin: 8vw;
 }
 
-/* Adicione no final do styles.css */
-
-table {
-    width: 90%;
-    margin: 20px auto;
-    border-collapse: collapse;
+table{
+    width: 80%;
+    margin: 0px;
     background-color: #F2E8CF;
-    /* Fundo claro */
-    border: 2px solid #386641;
+    padding: 0px;
+    text-align: center;
+    margin: auto;
+    border-radius: 10px;
+    border-spacing: 0px;
+    border: #386641 0px solid;
 }
 
 th,
-td {
-    padding: 15px;
-    border: 1px solid #386641;
-    color: #386641;
-    /* Letra escura */
-    font-size: 1.2rem;
+td{
+    padding: 3vw;
+    color: #BC4749;
+    font-size: 5vw;
     text-align: center;
+    border-color: #386641;
+    border: #386641 solid;
+    border-width: 3px 0px;
+    border-spacing: 0px;
+    border-radius: 0px;
 }
 
-th {
+th{
     background-color: #6A994E;
     color: #F2E8CF;
+    border-radius: 10px 10px 0px 0px;
+    border: 0;
 }
