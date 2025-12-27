@@ -66,9 +66,7 @@ function getNumber(event, fieldId, valueInArray){
     }
 
     if(numberTyped == "" || numberTyped == "undefined" || numberTyped == "null"){
-        alert("Espaço em branco!")
-        event.preventDefault();
-        return
+        numberTyped === "0"
     }
 
     numberTyped = math.evaluate(numberTyped);
