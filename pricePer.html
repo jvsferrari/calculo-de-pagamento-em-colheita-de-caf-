@@ -10,27 +10,27 @@
     <h1>Calcular pagamento de panhadores</h1>
     <form>
         <label for="pricePer">Preço por latão (R$/latão)</label><br>
-        <input id="pricePer" type="number" placeholder="Preço por latão (R$/latão)"><br>
+        <input id="pricePer" type="text" placeholder="Preço por latão (R$/latão)"><br>
     </form>
         <div id="keypad">
             <div class="row">
-                <button id="1">1</button>
-                <button id="2">2</button>
-                <button id="3">3</button>
+                <button onclick="typeNum(1, 'pricePer')">1</button>
+                <button onclick="typeNum(2, 'pricePer')">2</button>
+                <button onclick="typeNum(3, 'pricePer')">3</button>
             </div>
             <div class="row">
-                <button id="4">4</button>
-                <button id="5">5</button>
-                <button id="6">6</button>
+                <button onclick="typeNum(4, 'pricePer')">4</button>
+                <button onclick="typeNum(5, 'pricePer')">5</button>
+                <button onclick="typeNum(6, 'pricePer')">6</button>
             </div>
             <div class="row">
-                <button id="7">7</button>
-                <button id="8">8</button>
-                <button id="9">9</button>
+                <button onclick="typeNum(7, 'pricePer')">7</button>
+                <button onclick="typeNum(8, 'pricePer')">8</button>
+                <button onclick="typeNum(9, 'pricePer')">9</button>
             </div>
             <div class="row">
-                <button id="erase"><i class="fa-solid fa-eraser"></i></button>
-                <button id="0">0</button>
+                <button onclick="erase('pricePer')"><i class="fa-solid fa-eraser"></i></button>
+                <button onclick="typeNum(0, 'pricePer')">0</button>
                 <a id="lataoDone" href="latoes.html" onclick="getNumber(event,pricePerField, pricePer)"><i class="fa-solid fa-check"></i></a>
             </div>
         </div>
