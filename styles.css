@@ -101,12 +101,12 @@ table{
 th,
 td{
     padding: 3vw;
-    color: #BC4749;
+    color: #386641;
     font-size: 7vw;
     text-align: center;
-    border-color: #386641;
-    border: #386641 solid;
-    border-width: 3px 0px;
+    border-color: #6A994E;
+    border: #6A994E solid;
+    border-width: 5px 0px 0px 0px;
     border-spacing: 0px;
     border-radius: 0px;
 }
@@ -114,6 +114,13 @@ td{
 th{
     background-color: #6A994E;
     color: #F2E8CF;
-    border-radius: 10px 10px 0px 0px;
     border: 0;
+}
+
+#Nomes{
+    border-radius: 10px 0px 0px 0px;
+}
+
+#Valores{
+    border-radius: 0px 10px 0px 0px;
 }
