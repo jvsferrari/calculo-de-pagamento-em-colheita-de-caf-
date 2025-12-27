@@ -85,3 +85,29 @@ p{
     justify-content: space-around;
     margin: 8vw;
 }
+
+/* Adicione no final do styles.css */
+
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: #F2E8CF;
+    /* Fundo claro */
+    border: 2px solid #386641;
+}
+
+th,
+td {
+    padding: 15px;
+    border: 1px solid #386641;
+    color: #386641;
+    /* Letra escura */
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+th {
+    background-color: #6A994E;
+    color: #F2E8CF;
+}
