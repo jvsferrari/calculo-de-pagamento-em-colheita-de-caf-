@@ -1,32 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pagamento: total</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/14.8.1/math.js" integrity="sha512-AJmFmOXFAAzxbzp498VFGf+/Ke7n/O/Pz7L7R2in/4lEDkqhFvuIemyJo/MzXORunJkrJngeIyaWqLAj2rTY2Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://kit.fontawesome.com/1dc87a602b.js" crossorigin="anonymous"></script>
-</head>
-<body>
-<h1>Calcular pagamento de panhadores</h1>
+    <link rel="stylesheet" href="styles.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/14.8.1/math.js"
+      integrity="sha512-AJmFmOXFAAzxbzp498VFGf+/Ke7n/O/Pz7L7R2in/4lEDkqhFvuIemyJo/MzXORunJkrJngeIyaWqLAj2rTY2Q=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/1dc87a602b.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <h1>Calcular pagamento de panhadores</h1>
     <h2>Total</h2>
     <table>
-        <thead>
-            <tr>
-                <th id="Nomes">Nomes</th>
-                <th id="Valores">Valores a Receber</th>
-            </tr>
-        </thead>
-        <tbody id="results-table">
-        </tbody>
+      <thead>
+        <tr>
+          <th id="Nomes">Nomes</th>
+          <th id="Valores">Valores a Receber</th>
+        </tr>
+      </thead>
+      <tbody id="results-table"></tbody>
     </table>
 
-    <br><br>
+    <br /><br />
 
     <button onclick="localStorage.clear(); window.location.href='index.html'">
-        <i class="fa-solid fa-arrows-spin"></i>
+      <i class="fa-solid fa-arrows-spin"></i>
     </button>
     <script src="script.js"></script>
-</body> 
+  </body>
 </html>

@@ -1,46 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pagamento: litros</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://kit.fontawesome.com/1dc87a602b.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/14.8.1/math.js" integrity="sha512-AJmFmOXFAAzxbzp498VFGf+/Ke7n/O/Pz7L7R2in/4lEDkqhFvuIemyJo/MzXORunJkrJngeIyaWqLAj2rTY2Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-</head>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+    <script
+      src="https://kit.fontawesome.com/1dc87a602b.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/14.8.1/math.js"
+      integrity="sha512-AJmFmOXFAAzxbzp498VFGf+/Ke7n/O/Pz7L7R2in/4lEDkqhFvuIemyJo/MzXORunJkrJngeIyaWqLAj2rTY2Q=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+  <body>
     <form>
-        <label for="liters">Litros</label>
-        <div style="display: flex; justify-content: space-around; padding-top: 0; margin-bottom: 0.5em;">
-        <input id="liters" type="text" placeholder="Litros">
-        <div style="display: inline-flex; flex-direction: column;">
-                <button type="button" class="calc" onclick="typeNum('+','liters')"><i class="fa-solid fa-plus"></i></button><br>
-                <button type="button" class="calc" onclick="typeNum('-','liters')"><i class="fa-solid fa-minus"></i></button>
-            </div>
+      <label for="liters">Litros</label>
+      <div
+        style="
+          display: flex;
+          justify-content: space-around;
+          padding-top: 0;
+          margin-bottom: 0.5em;
+        "
+      >
+        <input id="liters" type="text" placeholder="Litros" />
+        <div style="display: inline-flex; flex-direction: column">
+          <button type="button" class="calc" onclick="typeNum('+','liters')">
+            <i class="fa-solid fa-plus"></i></button
+          ><br />
+          <button type="button" class="calc" onclick="typeNum('-','liters')">
+            <i class="fa-solid fa-minus"></i>
+          </button>
         </div>
+      </div>
     </form>
-        <div id="keypad">
-            <div class="row">
-                <button onclick="typeNum(1, 'liters')">1</button>
-                <button onclick="typeNum(2, 'liters')">2</button>
-                <button onclick="typeNum(3, 'liters')">3</button>
-            </div>
-            <div class="row">
-                <button onclick="typeNum(4, 'liters')">4</button>
-                <button onclick="typeNum(5, 'liters')">5</button>
-                <button onclick="typeNum(6, 'liters')">6</button>
-            </div>
-            <div class="row">
-                <button onclick="typeNum(7, 'liters')">7</button>
-                <button onclick="typeNum(8, 'liters')">8</button>
-                <button onclick="typeNum(9, 'liters')">9</button>
-            </div>
-            <div class="row">
-                <button onclick="erase('liters')"><i class="fa-solid fa-eraser"></i></button>
-                <button onclick="typeNum(0, 'liters')">0</button>
-                <a id="lataoDone" href="confirm.html" onclick="getNumber(event, 'liters', 'liters')"><i class="fa-solid fa-check"></i></a>
-            </div>
-        </div>
+    <div id="keypad">
+      <div class="row">
+        <button onclick="typeNum(1, 'liters')">1</button>
+        <button onclick="typeNum(2, 'liters')">2</button>
+        <button onclick="typeNum(3, 'liters')">3</button>
+      </div>
+      <div class="row">
+        <button onclick="typeNum(4, 'liters')">4</button>
+        <button onclick="typeNum(5, 'liters')">5</button>
+        <button onclick="typeNum(6, 'liters')">6</button>
+      </div>
+      <div class="row">
+        <button onclick="typeNum(7, 'liters')">7</button>
+        <button onclick="typeNum(8, 'liters')">8</button>
+        <button onclick="typeNum(9, 'liters')">9</button>
+      </div>
+      <div class="row">
+        <button onclick="erase('liters')">
+          <i class="fa-solid fa-eraser"></i>
+        </button>
+        <button onclick="typeNum(0, 'liters')">0</button>
+        <a
+          id="lataoDone"
+          href="confirm.html"
+          onclick="getNumber(event, 'liters', 'liters')"
+          ><i class="fa-solid fa-check"></i
+        ></a>
+      </div>
+    </div>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
