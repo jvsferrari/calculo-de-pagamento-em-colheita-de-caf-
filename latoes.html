@@ -1,20 +1,12 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pagamento: latões</title>
     <link rel="stylesheet" href="styles.css" />
-    <script
-      src="https://kit.fontawesome.com/1dc87a602b.js"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/14.8.1/math.js"
-      integrity="sha512-AJmFmOXFAAzxbzp498VFGf+/Ke7n/O/Pz7L7R2in/4lEDkqhFvuIemyJo/MzXORunJkrJngeIyaWqLAj2rTY2Q=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
+    <script src="math.js" defer></script>
+    <link rel="stylesheet" href="css/all.min.css" />
   </head>
   <body>
     <form>
@@ -29,10 +21,10 @@
       >
         <input id="latoes" type="text" placeholder="Latões" />
         <div style="display: inline-flex; flex-direction: column">
-          <button type="button" class="calc" onclick="typeNum('+','latoes')">
+          <button type="button" class="calc" onclick="typeNum('+', 'latoes')">
             <i class="fa-solid fa-plus"></i></button
           ><br />
-          <button type="button" class="calc" onclick="typeNum('-','latoes')">
+          <button type="button" class="calc" onclick="typeNum('-', 'latoes')">
             <i class="fa-solid fa-minus"></i>
           </button>
         </div>

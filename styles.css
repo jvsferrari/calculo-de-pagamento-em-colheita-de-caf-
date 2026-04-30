@@ -9,10 +9,15 @@ html,
 body {
   padding: 0;
   background-color: #a7c957;
+  min-height: 100dvh; 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between
 }
 
 a,
 button {
+  margin: auto;
   background-color: #386641;
   display: inline-flex;
   aspect-ratio: 1 / 1;
@@ -31,7 +36,7 @@ button {
 input {
   padding: 1em 1em;
   width: 60%;
-  font-size: 6vw;
+  font-size: 8vw;
   color: #bc4749;
   background-color: #f2e8cf;
   border: 0;
@@ -60,14 +65,14 @@ h1 {
   color: #f2e8cf;
   background-color: #6a994e;
   padding: 1rem;
-  font-size: 8vw;
+  font-size: 9vw;
 }
 
 label,
 h2 {
   color: #386641;
   font-weight: 1000;
-  font-size: 7vw;
+  font-size: 10vw;
   display: block;
   margin: 0.5em;
 }
@@ -83,7 +88,7 @@ p {
   width: fit-content;
   color: #386641;
   font-weight: 1000;
-  font-size: 5vw;
+  font-size: 7vw;
   display: block;
 }
 
@@ -130,4 +135,9 @@ th {
 
 #Valores {
   border-radius: 0px 10px 0px 0px;
+}
+
+.interactive{
+  margin: auto 0;
+  text-align: center;
 }

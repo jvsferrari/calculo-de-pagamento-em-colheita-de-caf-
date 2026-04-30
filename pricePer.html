@@ -1,45 +1,64 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pagamento: preço por latão</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://kit.fontawesome.com/1dc87a602b.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/14.8.1/math.js" integrity="sha512-AJmFmOXFAAzxbzp498VFGf+/Ke7n/O/Pz7L7R2in/4lEDkqhFvuIemyJo/MzXORunJkrJngeIyaWqLAj2rTY2Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<body>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="math.js"></script>
+    <link rel="stylesheet" href="css/all.min.css" />
+  </head>
+  <body>
     <form>
-        <label for="pricePer">Preço por latão (R$/latão)</label>
-        <div style="display: flex; justify-content: space-around; padding-top: 0; margin-bottom: 0.5em;">
-            <input id="pricePer" type="text" placeholder="Preço por latão">
-            <div style="display: inline-flex; flex-direction: column;">
-                <button type="button" class="calc" onclick="typeNum('+','pricePer')"><i class="fa-solid fa-plus"></i></button><br>
-                <button type="button" class="calc" onclick="typeNum('-','pricePer')"><i class="fa-solid fa-minus"></i></button>
-            </div>
+      <label for="pricePer">Preço por latão (R$/latão)</label>
+      <div
+        style="
+          display: flex;
+          justify-content: space-around;
+          padding-top: 0;
+          margin-bottom: 0.5em;
+        "
+      >
+        <input id="pricePer" type="text" placeholder="Preço por latão" />
+        <div style="display: inline-flex; flex-direction: column">
+          <button type="button" class="calc" onclick="typeNum('+', 'pricePer')">
+            <i class="fa-solid fa-plus"></i></button
+          ><br />
+          <button type="button" class="calc" onclick="typeNum('-', 'pricePer')">
+            <i class="fa-solid fa-minus"></i>
+          </button>
         </div>
-    </form>    
-        <div id="keypad">
-            <div class="row">
-                <button onclick="typeNum(1, 'pricePer')">1</button>
-                <button onclick="typeNum(2, 'pricePer')">2</button>
-                <button onclick="typeNum(3, 'pricePer')">3</button>
-            </div>
-            <div class="row">
-                <button onclick="typeNum(4, 'pricePer')">4</button>
-                <button onclick="typeNum(5, 'pricePer')">5</button>
-                <button onclick="typeNum(6, 'pricePer')">6</button>
-            </div>
-            <div class="row">
-                <button onclick="typeNum(7, 'pricePer')">7</button>
-                <button onclick="typeNum(8, 'pricePer')">8</button>
-                <button onclick="typeNum(9, 'pricePer')">9</button>
-            </div>
-            <div class="row">
-                <button onclick="erase('pricePer')"><i class="fa-solid fa-eraser"></i></button>
-                <button onclick="typeNum(0, 'pricePer')">0</button>
-                <a id="lataoDone" href="latoes.html" onclick="getNumber(event, 'pricePer', 'pricePer')"><i class="fa-solid fa-check"></i></a>
-            </div>
-        </div>
+      </div>
+    </form>
+    <div id="keypad">
+      <div class="row">
+        <button onclick="typeNum(1, 'pricePer')">1</button>
+        <button onclick="typeNum(2, 'pricePer')">2</button>
+        <button onclick="typeNum(3, 'pricePer')">3</button>
+      </div>
+      <div class="row">
+        <button onclick="typeNum(4, 'pricePer')">4</button>
+        <button onclick="typeNum(5, 'pricePer')">5</button>
+        <button onclick="typeNum(6, 'pricePer')">6</button>
+      </div>
+      <div class="row">
+        <button onclick="typeNum(7, 'pricePer')">7</button>
+        <button onclick="typeNum(8, 'pricePer')">8</button>
+        <button onclick="typeNum(9, 'pricePer')">9</button>
+      </div>
+      <div class="row">
+        <button onclick="erase('pricePer')">
+          <i class="fa-solid fa-eraser"></i>
+        </button>
+        <button onclick="typeNum(0, 'pricePer')">0</button>
+        <a
+          id="lataoDone"
+          href="latoes.html"
+          onclick="getNumber(event, 'pricePer', 'pricePer')"
+          ><i class="fa-solid fa-check"></i
+        ></a>
+      </div>
+    </div>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
