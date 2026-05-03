@@ -12,6 +12,7 @@ const nomePronto = document.querySelector('#nomePronto');
 const numeroPronto = document.querySelector('#numeroPronto');
 const etapa = document.querySelector('#etapa');
 
+let numPanhador = -1;
 let passo = 1;
 let panhadores = [];
 // preço novo??????????????????????????????? checkbox
@@ -20,8 +21,9 @@ function novoPanhador() {
 	if (nome == null || nome == undefined || nome.trim() == '') {
 		nome = 'Nome não definido';
 	} else campoNome.value = '';
+	numPanhador++;
 	return {
-		index: 0,
+		index: numPanhador,
 		nome: nome,
 		preço: 0,
 		latoes: 0,
@@ -32,14 +34,40 @@ function novoPanhador() {
 
 nomePronto.addEventListener('click', () => {
 	panhadores.push(novoPanhador());
+	proximaPagina(passo);
 });
+
 window.addEventListener('popstate', function (event) {});
 
-nomePronto.addEventListener('click', () => {
-	proximaPagina(1);
-});
 numeroPronto.addEventListener('click', () => {
+	switch (passo) {
+		case 2:
+			panhadores[numPanhador].preço = math.evaluate(
+				campoCalculadora.value,
+			);
+			campoCalculadora.value = '';
+			break;
+		case 3:
+			panhadores[numPanhador].latoes = math.evaluate(
+				campoCalculadora.value,
+			);
+			campoCalculadora.value = '';
+			break;
+		case 4:
+			panhadores[numPanhador].litros = math.evaluate(
+				campoCalculadora.value,
+			);
+			campoCalculadora.value = '';
+			calcularResultados();
+			break;
+	}
 	proximaPagina(passo);
+});
+
+numeros.forEach((tecla) => {
+	tecla.addEventListener('click', () => {
+		campoCalculadora.value += tecla.innerText;
+	});
 });
 
 function proximaPagina() {
@@ -70,6 +98,14 @@ function proximaPagina() {
 			window.history.pushState({ passo: passo }, '', '#' + 'resultados');
 			mostrarResultados();
 			break;
+	}
+}
+
+function calcularResultados() {
+	for (let i = 0; i < panhadores.length; i++) {
+		panhadores[i].total =
+			(panhadores[i].latoes + panhadores[i].litros / 60) *
+			panhadores[i].preço;
 	}
 }
 
@@ -115,129 +151,3 @@ function exportarParaPDF() {
 	doc.autoTable({ html: '#tabela' });
 	doc.save('acertoCafe.pdf');
 }
-
-/*
-const DATABANK_NAME = 'allData';
-
-function typeNum(key, fieldId) {
-	const field = document.getElementById(fieldId);
-	if (!field) {
-		return;
-	}
-	field.value = field.value + key;
-}
-
-function erase(fieldId) {
-	const field = document.getElementById(fieldId);
-	if (!field) {
-		return;
-	}
-	field.value = field.value.slice(0, -1);
-}
-
-function readDatabase() {
-	return JSON.parse(localStorage.getItem(DATABANK_NAME)) || [];
-}
-
-function saveData(list) {
-	localStorage.setItem(DATABANK_NAME, JSON.stringify(list));
-}
-
-function novoPanhador() {
-	const camppo = document.getElementById('name');
-	if (!nameField) {
-		return;
-	}
-	let nameTyped = nameField.value;
-
-	if (nameTyped === '' || nameTyped === 'null' || nameTyped === 'undefined') {
-		nameTyped = 'Nome não inserido';
-	}
-
-	const list = readDatabase();
-
-	list.push({
-		names: nameTyped,
-		pricePer: 0,
-		latoes: 0,
-		liters: 0,
-	});
-
-	saveData(list);
-}
-
-function getNumber(event, fieldId, valueInArray) {
-	const field = document.getElementById(fieldId);
-	if (!field) {
-		return;
-	}
-
-	let numberTyped = field.value;
-
-	if 
-	}
-
-	if (
-		numberTyped == '' ||
-		numberTyped == 'undefined' ||
-		numberTyped == 'null'
-	) {
-		numberTyped === '0';
-	}
-
-	numberTyped = math.evaluate(numberTyped);
-
-	numberTyped = parseFloat(numberTyped);
-
-	const list = readDatabase();
-
-	if (list.length === 0) {
-		alert('Comece pela página 1!');
-		event.preventDefault();
-		return;
-	}
-
-	const lastPerson = list[list.length - 1];
-
-	lastPerson[valueInArray] = numberTyped;
-
-	saveData(list);
-}
-
-function finalResults() {
-	const fullList = readDatabase();
-	const tableBody = document.getElementById('results-table');
-	if (!tableBody) {
-		return;
-	}
-
-	tableBody.textContent = '';
-
-	const calculatedList = fullList.map(function (worker) {
-		const pricePer = worker.pricePer || 0;
-		const latoes = worker.latoes || 0;
-		const liters = worker.liters || 0;
-		const costCalculated = (pricePer / 60) * (latoes * 60 + liters);
-		return {
-			names: worker.names,
-			finalCost: costCalculated,
-		};
-	});
-
-	calculatedList.forEach(function (item) {
-		const tr = document.createElement('tr');
-
-		const tdName = document.createElement('td');
-		tdName.innerText = item.names;
-
-		const tdCost = document.createElement('td');
-		tdCost.innerText = item.finalCost.toFixed(2);
-
-		tr.appendChild(tdName);
-		tr.appendChild(tdCost);
-		tableBody.appendChild(tr);
-	});
-}
-
-finalResults();
-*/
