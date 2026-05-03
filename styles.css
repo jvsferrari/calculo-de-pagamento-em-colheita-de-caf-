@@ -24,7 +24,7 @@ body,
 	height: 100dvh;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: center;
 }
 
@@ -79,8 +79,13 @@ form {
 .pagina h1 {
 	color: #f2e8cf;
 	background-color: #6a994e;
-	padding: 1rem;
+	padding: 20px;
 	font-size: 9vw;
+	position: fixed;
+	top: 0;
+	left: 0;
+	box-sizing: border-box;
+	width: 100dvw;
 }
 
 label,
@@ -109,7 +114,6 @@ p {
 
 table {
 	width: 80%;
-	margin: 0px;
 	background-color: #f2e8cf;
 	padding: 0px;
 	text-align: center;
@@ -157,21 +161,42 @@ body > div {
 	padding: 0;
 }
 
-.botoes {
-	display: flex;
-	justify-content: space-around;
-}
-
 .botaoComposto {
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	flex-direction: column;
 	align-items: center;
-	margin: 40px;
+	margin: 0;
 	gap: 20px;
 }
 
 #calculadora,
+#confirmar,
 #resultados {
 	display: none;
+}
+
+.botoes {
+	display: flex;
+	justify-content: space-evenly;
+	width: 100dvw;
+}
+
+#campoNome {
+	height: 10dvh;
+}
+
+div:has(h1),
+#nomes {
+	padding-top: 80px;
+}
+
+#resultados .botaoComposto button {
+	font-size: 7vw;
+	width: 20vw;
+	height: 20vw;
+}
+
+#resultados .botaoComposto p {
+	font-size: 6vw;
 }

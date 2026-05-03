@@ -13,7 +13,7 @@
 	</head>
 	<body>
 		<div class="pagina" id="nomes">
-			<h1>Calcular pagamento de panhadores</h1>
+			<h1>Calcular pagamento</h1>
 			<h2>
 				Nome <br />
 				do panhador
@@ -67,7 +67,7 @@
 			</div>
 		</div>
 		<div class="pagina" id="resultados">
-			<h2>Total</h2>
+			<h1>Total</h1>
 			<table>
 				<thead>
 					<tr>
@@ -75,15 +75,51 @@
 						<th id="thvalores">Valores a Receber</th>
 					</tr>
 				</thead>
-				<tbody id="tabela">
-					<td>dw</td>
-					<td>nidxoiwn</td>
-				</tbody>
+				<tbody id="tabela"></tbody>
 			</table>
-			<button id="reiniciar">
-				<i class="fa-solid fa-arrows-spin"></i>
-			</button>
-			<button id="exportar"></button>
+			<div class="botoes">
+				<div class="botaoComposto">
+					<button id="reiniciar">
+						<i class="fa-solid fa-arrows-spin"></i>
+					</button>
+					<p>Reiniciar</p>
+				</div>
+				<div class="botaoComposto">
+					<button id="zerar">
+						<i class="fa-solid fa-trash"></i>
+					</button>
+					<p>Zerar</p>
+				</div>
+
+				<div class="botaoComposto">
+					<button id="baixar">
+						<i class="fa-solid fa-download"></i>
+					</button>
+					<p>Baixar</p>
+				</div>
+				<div class="botaoComposto">
+					<button id="compartilhar">
+						<i class="fa-solid fa-share"></i>
+					</button>
+					<p>Enviar</p>
+				</div>
+			</div>
+		</div>
+		<div id="confirmar" class="pagina">
+			<h1>Calcular pagamento</h1>
+			<h2>Finalizar?</h2>
+			<div class="botaoComposto">
+				<button id="adicionar">
+					<i class="fa-solid fa-plus"></i>
+				</button>
+				<p>Adicionar</p>
+			</div>
+			<div class="botaoComposto">
+				<button id="finalizar">
+					<i class="fa-solid fa-check"></i>
+				</button>
+				<p>Finalizar</p>
+			</div>
 		</div>
 	</body>
 </html>

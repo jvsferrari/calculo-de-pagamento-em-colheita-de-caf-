@@ -11,6 +11,13 @@ const campoCalculadora = document.querySelector('#campoCalculadora');
 const nomePronto = document.querySelector('#nomePronto');
 const numeroPronto = document.querySelector('#numeroPronto');
 const etapa = document.querySelector('#etapa');
+const confirmar = document.querySelector('#confirmar');
+const finalizar = document.querySelector('#finalizar');
+const adicionar = document.querySelector('#adicionar');
+const baixar = document.querySelector('#baixar');
+const compartilhar = document.querySelector('#compartilhar');
+const reiniciar = document.querySelector('#reiniciar');
+const zerar = document.querySelector('#zerar');
 
 let numPanhador = -1;
 let passo = 1;
@@ -38,6 +45,21 @@ nomePronto.addEventListener('click', () => {
 });
 
 window.addEventListener('popstate', function (event) {});
+
+finalizar.addEventListener('click', () => {
+	confirmar.style.display = 'none';
+	resultados.style.display = 'flex';
+	window.history.pushState({ passo: passo }, '', '#' + 'resultados');
+	calcularResultados();
+	mostrarResultados();
+});
+
+adicionar.addEventListener('click', () => {
+	passo = 1;
+	nomes.style.display = 'flex';
+	confirmar.style.display = 'none';
+	window.history.pushState({ passo: passo }, '', '#' + 'nome');
+});
 
 numeroPronto.addEventListener('click', () => {
 	switch (passo) {
@@ -70,6 +92,30 @@ numeros.forEach((tecla) => {
 	});
 });
 
+compartilhar.addEventListener('click', () => {
+	compartilharPdf('compartilhar');
+});
+
+baixar.addEventListener('click', () => {
+	compartilharPdf('baixar');
+});
+
+reiniciar.addEventListener('click', () => {
+	passo = 1;
+	nomes.style.display = 'flex';
+	resultados.style.display = 'none';
+	window.history.pushState({ passo: passo }, '', '#' + 'nome');
+});
+
+zerar.addEventListener('click', () => {
+	panhadores = [];
+	tabela.replaceChildren();
+	passo = 1;
+	nomes.style.display = 'flex';
+	resultados.style.display = 'none';
+	window.history.pushState({ passo: passo }, '', '#' + 'nome');
+});
+
 function proximaPagina() {
 	switch (passo) {
 		case 1:
@@ -94,27 +140,42 @@ function proximaPagina() {
 			break;
 		case 4:
 			calculadora.style.display = 'none';
-			resultados.style.display = 'flex';
-			window.history.pushState({ passo: passo }, '', '#' + 'resultados');
-			mostrarResultados();
+			confirmar.style.display = 'flex';
+			window.history.pushState({ passo: passo }, '', '#' + 'confirmar');
+			passo = 5;
 			break;
 	}
 }
 
 function calcularResultados() {
 	for (let i = 0; i < panhadores.length; i++) {
-		panhadores[i].total =
+		panhadores[i].total = (
 			(panhadores[i].latoes + panhadores[i].litros / 60) *
-			panhadores[i].preço;
+			panhadores[i].preço
+		).toFixed(2);
+		if (isNaN(panhadores[i].total)) {
+			panhadores[i].total = 0;
+		}
 	}
 }
 
-function mostrarResultados() {}
+function mostrarResultados() {
+	for (let i = 0; i < panhadores.length; i++) {
+		let linha = document.createElement('tr');
+		let nome = document.createElement('td');
+		nome.innerText = panhadores[i].nome;
+		linha.appendChild(nome);
+		let total = document.createElement('td');
+		total.innerText = panhadores[i].total;
+		linha.appendChild(total);
+		tabela.appendChild(linha);
+	}
+}
 
-async function compartilharPdf() {
+async function compartilharPdf(chamador) {
 	const { jsPDF } = window.jspdf;
 	const doc = new jsPDF();
-	doc.autoTable({ html: '#minhaTabela' });
+	doc.autoTable({ html: '#tabela' });
 
 	// 1. Gera o Blob
 	const pdfBlob = doc.output('blob');
@@ -125,7 +186,11 @@ async function compartilharPdf() {
 	});
 
 	// 3. Verifica se o navegador suporta compartilhamento de arquivos
-	if (navigator.canShare && navigator.canShare({ files: [arquivo] })) {
+	if (
+		navigator.canShare &&
+		navigator.canShare({ files: [arquivo] }) &&
+		chamador == 'compartilhar'
+	) {
 		try {
 			await navigator.share({
 				files: [arquivo],
@@ -137,10 +202,6 @@ async function compartilharPdf() {
 			console.log('O usuário cancelou o compartilhamento.', erro);
 		}
 	} else {
-		// Plano B: Se estiver no PC ou navegador antigo, apenas baixa o arquivo
-		alert(
-			'Compartilhamento não suportado neste navegador. Baixando arquivo...',
-		);
 		doc.save('relatorio.pdf');
 	}
 }
