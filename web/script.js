@@ -19,6 +19,8 @@ const compartilhar = document.querySelector('#compartilhar');
 const reiniciar = document.querySelector('#reiniciar');
 const zerar = document.querySelector('#zerar');
 const borracha = document.querySelector('#borracha');
+const pular = document.querySelector('#pular');
+const paginas = document.querySelectorAll('.pagina');
 
 let numPanhador = -1;
 let passo = 1;
@@ -45,6 +47,11 @@ nomePronto.addEventListener('click', () => {
 	proximaPagina(passo);
 });
 
+pular.addEventListener('click', () => {
+	panhadores.push(novoPanhador());
+	proximaPagina(passo);
+});
+
 window.addEventListener('popstate', function (event) {});
 
 borracha.addEventListener('click', () => {
@@ -54,6 +61,7 @@ borracha.addEventListener('click', () => {
 finalizar.addEventListener('click', () => {
 	confirmar.style.display = 'none';
 	resultados.style.display = 'flex';
+	passo = 6;
 	window.history.pushState({ passo: passo }, '', '#' + 'resultados');
 	calcularResultados();
 	mostrarResultados();
@@ -131,26 +139,26 @@ function proximaPagina() {
 			etapa.innerText = 'Preço por litro';
 			nomes.style.display = 'none';
 			calculadora.style.display = 'flex';
-			window.history.pushState({ passo: passo }, '', '#' + 'preco');
 			passo = 2;
+			window.history.pushState({ passo: passo }, '', '#' + 'preco');
 			break;
 		case 2:
 			campoCalculadora.placeholder = 'Latões';
 			etapa.innerText = 'Latões';
-			window.history.pushState({ passo: passo }, '', '#' + 'latoes');
 			passo = 3;
+			window.history.pushState({ passo: passo }, '', '#' + 'latoes');
 			break;
 		case 3:
 			campoCalculadora.placeholder = 'Litros';
 			etapa.innerText = 'Litros';
-			window.history.pushState({ passo: passo }, '', '#' + 'litros');
 			passo = 4;
+			window.history.pushState({ passo: passo }, '', '#' + 'litros');
 			break;
 		case 4:
 			calculadora.style.display = 'none';
 			confirmar.style.display = 'flex';
-			window.history.pushState({ passo: passo }, '', '#' + 'confirmar');
 			passo = 5;
+			window.history.pushState({ passo: passo }, '', '#' + 'confirmar');
 			break;
 	}
 }
@@ -214,9 +222,51 @@ async function compartilharPdf(chamador) {
 	}
 }
 
-function exportarParaPDF() {
-	const { jsPDF } = window.jspdf;
-	const doc = new jsPDF();
-	doc.autoTable({ html: '#tabela' });
-	doc.save('acertoCafe.pdf');
+window.addEventListener('popstate', (event) => {
+	if (event.state && event.state.passo) {
+		exibirPagina(event.state.passo);
+		passo = event.state.passo;
+	} else {
+		exibirPagina(1);
+	}
+});
+
+window.addEventListener('load', () => {
+	window.history.replaceState({ passo: 1 }, '', '#nomes');
+});
+
+function exibirPagina(passo) {
+	paginas.forEach((pagina) => {
+		pagina.style.display = 'none';
+	});
+	switch (passo) {
+		case 1:
+			nomes.style.display = 'flex';
+			break;
+		case 2:
+			campoCalculadora.placeholder = 'Preço por litro R$/Litro';
+			etapa.innerText = 'Preço por litro';
+			calculadora.style.display = 'flex';
+			break;
+		case 3:
+			campoCalculadora.placeholder = 'Latões';
+			etapa.innerText = 'Latões';
+			calculadora.style.display = 'flex';
+			break;
+		case 4:
+			campoCalculadora.placeholder = 'Litros';
+			etapa.innerText = 'Litros';
+			calculadora.style.display = 'flex';
+			break;
+		case 5:
+			confirmar.style.display = 'flex';
+			break;
+		case 6:
+			resultados.style.display = 'flex';
+			break;
+	}
 }
+
+window.onbeforeunload = () => {
+	return 'You have unsaved changes. Do you really want to refresh the page?';
+};
