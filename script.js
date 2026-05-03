@@ -1,6 +1,3 @@
-const botaoPronto = document.querySelectorAll('.pronto');
-const botaoPular = document.querySelector('#pular');
-const botaoReiniciar = document.querySelector('#reiniciar');
 const tabela = document.querySelector('#tabela');
 const nomes = document.querySelector('#nomes');
 const calculadora = document.querySelector('#calculadora');
@@ -22,7 +19,7 @@ const borracha = document.querySelector('#borracha');
 const pular = document.querySelector('#pular');
 const paginas = document.querySelectorAll('.pagina');
 
-let numPanhador = -1;
+let numPanhador = 0;
 let passo = 1;
 let panhadores = [];
 // preço novo??????????????????????????????? checkbox
@@ -31,7 +28,6 @@ function novoPanhador() {
 	if (nome == null || nome == undefined || nome.trim() == '') {
 		nome = 'Nome não definido';
 	} else campoNome.value = '';
-	numPanhador++;
 	return {
 		index: numPanhador,
 		nome: nome,
@@ -43,16 +39,14 @@ function novoPanhador() {
 }
 
 nomePronto.addEventListener('click', () => {
-	panhadores.push(novoPanhador());
-	proximaPagina(passo);
+	panhadores[numPanhador] = novoPanhador();
+	proximaPagina();
 });
 
 pular.addEventListener('click', () => {
-	panhadores.push(novoPanhador());
-	proximaPagina(passo);
+	panhadores[numPanhador] = novoPanhador();
+	proximaPagina();
 });
-
-window.addEventListener('popstate', function (event) {});
 
 borracha.addEventListener('click', () => {
 	campoCalculadora.value = campoCalculadora.value.slice(0, -1);
@@ -68,35 +62,51 @@ finalizar.addEventListener('click', () => {
 });
 
 adicionar.addEventListener('click', () => {
+	numPanhador++;
 	passo = 1;
 	nomes.style.display = 'flex';
 	confirmar.style.display = 'none';
-	window.history.pushState({ passo: passo }, '', '#' + 'nome');
+	window.history.pushState({ passo: passo }, '', '#' + 'nomes');
 });
 
 numeroPronto.addEventListener('click', () => {
 	switch (passo) {
 		case 2:
-			panhadores[numPanhador].preço = math.evaluate(
-				campoCalculadora.value,
-			);
+			try {
+				let expressao = campoCalculadora.value.trim();
+				panhadores[numPanhador].preço =
+					expressao === '' ? 0 : math.evaluate(expressao);
+			} catch (erro) {
+				alert('Expressão matemática inválida! Corrija os valores.');
+				return;
+			}
 			campoCalculadora.value = '';
 			break;
 		case 3:
-			panhadores[numPanhador].latoes = math.evaluate(
-				campoCalculadora.value,
-			);
+			try {
+				let expressao = campoCalculadora.value.trim();
+				panhadores[numPanhador].latoes =
+					expressao === '' ? 0 : math.evaluate(expressao);
+			} catch (erro) {
+				alert('Expressão matemática inválida! Corrija os valores.');
+				return;
+			}
 			campoCalculadora.value = '';
 			break;
 		case 4:
-			panhadores[numPanhador].litros = math.evaluate(
-				campoCalculadora.value,
-			);
+			try {
+				let expressao = campoCalculadora.value.trim();
+				panhadores[numPanhador].litros =
+					expressao === '' ? 0 : math.evaluate(expressao);
+			} catch (erro) {
+				alert('Expressão matemática inválida! Corrija os valores.');
+				return;
+			}
 			campoCalculadora.value = '';
 			calcularResultados();
 			break;
 	}
-	proximaPagina(passo);
+	proximaPagina();
 });
 
 numeros.forEach((tecla) => {
@@ -114,29 +124,29 @@ baixar.addEventListener('click', () => {
 });
 
 reiniciar.addEventListener('click', () => {
-	numPanhador = -1;
+	numPanhador++;
 	passo = 1;
 	nomes.style.display = 'flex';
 	resultados.style.display = 'none';
 	tabela.replaceChildren();
-	window.history.pushState({ passo: passo }, '', '#' + 'nome');
+	window.history.pushState({ passo: passo }, '', '#' + 'nomes');
 });
 
 zerar.addEventListener('click', () => {
-	numPanhador = -1;
+	numPanhador = 0;
 	panhadores = [];
 	tabela.replaceChildren();
 	passo = 1;
 	nomes.style.display = 'flex';
 	resultados.style.display = 'none';
-	window.history.pushState({ passo: passo }, '', '#' + 'nome');
+	window.history.pushState({ passo: passo }, '', '#' + 'nomes');
 });
 
 function proximaPagina() {
 	switch (passo) {
 		case 1:
-			campoCalculadora.placeholder = 'Preço por litro R$/Litro';
-			etapa.innerText = 'Preço por litro';
+			campoCalculadora.placeholder = 'Preço por Latão R$/Latão';
+			etapa.innerText = 'Preço por Latão';
 			nomes.style.display = 'none';
 			calculadora.style.display = 'flex';
 			passo = 2;
@@ -165,10 +175,9 @@ function proximaPagina() {
 
 function calcularResultados() {
 	for (let i = 0; i < panhadores.length; i++) {
-		panhadores[i].total = (
+		panhadores[i].total =
 			(panhadores[i].latoes + panhadores[i].litros / 60) *
-			panhadores[i].preço
-		).toFixed(2);
+			panhadores[i].preço;
 		if (isNaN(panhadores[i].total)) {
 			panhadores[i].total = 0;
 		}
@@ -176,13 +185,14 @@ function calcularResultados() {
 }
 
 function mostrarResultados() {
+	tabela.replaceChildren();
 	for (let i = 0; i < panhadores.length; i++) {
 		let linha = document.createElement('tr');
 		let nome = document.createElement('td');
 		nome.innerText = panhadores[i].nome;
 		linha.appendChild(nome);
 		let total = document.createElement('td');
-		total.innerText = panhadores[i].total;
+		total.innerText = panhadores[i].total.toFixed(2);
 		linha.appendChild(total);
 		tabela.appendChild(linha);
 	}
@@ -191,7 +201,7 @@ function mostrarResultados() {
 async function compartilharPdf(chamador) {
 	const { jsPDF } = window.jspdf;
 	const doc = new jsPDF();
-	doc.autoTable({ html: '#tabela' });
+	doc.autoTable({ html: 'table' });
 
 	// 1. Gera o Blob
 	const pdfBlob = doc.output('blob');
@@ -228,6 +238,7 @@ window.addEventListener('popstate', (event) => {
 		passo = event.state.passo;
 	} else {
 		exibirPagina(1);
+		passo = 1;
 	}
 });
 
@@ -244,8 +255,8 @@ function exibirPagina(passo) {
 			nomes.style.display = 'flex';
 			break;
 		case 2:
-			campoCalculadora.placeholder = 'Preço por litro R$/Litro';
-			etapa.innerText = 'Preço por litro';
+			campoCalculadora.placeholder = 'Preço por Latão R$/Latão';
+			etapa.innerText = 'Preço por Latão';
 			calculadora.style.display = 'flex';
 			break;
 		case 3:
