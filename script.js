@@ -101,13 +101,16 @@ baixar.addEventListener('click', () => {
 });
 
 reiniciar.addEventListener('click', () => {
+	numPanhador = -1;
 	passo = 1;
 	nomes.style.display = 'flex';
 	resultados.style.display = 'none';
+	tabela.replaceChildren();
 	window.history.pushState({ passo: passo }, '', '#' + 'nome');
 });
 
 zerar.addEventListener('click', () => {
+	numPanhador = -1;
 	panhadores = [];
 	tabela.replaceChildren();
 	passo = 1;
