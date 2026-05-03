@@ -18,6 +18,7 @@ const baixar = document.querySelector('#baixar');
 const compartilhar = document.querySelector('#compartilhar');
 const reiniciar = document.querySelector('#reiniciar');
 const zerar = document.querySelector('#zerar');
+const borracha = document.querySelector('#borracha');
 
 let numPanhador = -1;
 let passo = 1;
@@ -45,6 +46,10 @@ nomePronto.addEventListener('click', () => {
 });
 
 window.addEventListener('popstate', function (event) {});
+
+borracha.addEventListener('click', () => {
+	campoCalculadora.value = campoCalculadora.value.slice(0, -1);
+});
 
 finalizar.addEventListener('click', () => {
 	confirmar.style.display = 'none';
