@@ -228,7 +228,7 @@ function mostrarResultados() {
 }
 
 async function compartilharPdf(chamador) {
-	tabelaToda.classList.remove('mostrando');
+	tabelaToda.classList.remove('escondido');
 	const { jsPDF } = window.jspdf;
 	const doc = new jsPDF();
 	doc.autoTable({ html: 'table' });
@@ -260,7 +260,7 @@ async function compartilharPdf(chamador) {
 	} else {
 		doc.save('relatorio.pdf');
 	}
-	tabelaToda.classList.add('mostrando');
+	tabelaToda.classList.add('escondido');
 }
 
 window.addEventListener('popstate', (event) => {
