@@ -18,6 +18,7 @@ const zerar = document.querySelector('#zerar');
 const borracha = document.querySelector('#borracha');
 const pular = document.querySelector('#pular');
 const paginas = document.querySelectorAll('.pagina');
+const tabelaToda = document.querySelector('#tabelaToda');
 
 let numPanhador = 0;
 let passo = 1;
@@ -227,6 +228,7 @@ function mostrarResultados() {
 }
 
 async function compartilharPdf(chamador) {
+	tabelaToda.classList.remove('mostrando');
 	const { jsPDF } = window.jspdf;
 	const doc = new jsPDF();
 	doc.autoTable({ html: 'table' });
@@ -258,6 +260,7 @@ async function compartilharPdf(chamador) {
 	} else {
 		doc.save('relatorio.pdf');
 	}
+	tabelaToda.classList.add('mostrando');
 }
 
 window.addEventListener('popstate', (event) => {

@@ -202,6 +202,6 @@ div:has(h1),
 	font-size: 6vw;
 }
 
-.quantidadeCafe {
+body.mostrando .quantidadeCafe {
 	display: none;
 }
