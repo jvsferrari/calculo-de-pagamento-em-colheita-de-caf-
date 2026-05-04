@@ -193,9 +193,37 @@ function mostrarResultados() {
 		linha.appendChild(nome);
 		let total = document.createElement('td');
 		total.innerText = panhadores[i].total.toFixed(2);
+		let quantidadeCafe = document.createElement('td');
+		quantidadeCafe.innerText = `${panhadores[i].latoes} latões e ${panhadores[i].litros} litros`;
+		quantidadeCafe.classList.add('quantidadeCafe');
 		linha.appendChild(total);
+		linha.appendChild(quantidadeCafe);
 		tabela.appendChild(linha);
 	}
+	let linhaSoma = document.createElement('tr');
+	let soma1 = document.createElement('td');
+	let soma2 = document.createElement('td');
+	let soma3 = document.createElement('td');
+	soma1.innerText = 'Total';
+	let soma = 0;
+	let somaLatoes = 0;
+	let somaLitros = 0;
+	for (let i = 0; i < panhadores.length; i++) {
+		soma += panhadores[i].total;
+		somaLatoes += panhadores[i].latoes;
+		somaLitros += panhadores[i].litros;
+	}
+	let quociente = Math.floor(somaLitros / 60);
+	let resto = somaLitros % 60;
+	somaLatoes += quociente;
+	somaLitros = Math.floor(resto);
+	soma2.innerText = soma.toFixed(2);
+	soma3.innerText = `${somaLatoes} latões e ${somaLitros} litros`;
+	soma3.classList.add('quantidadeCafe');
+	tabela.appendChild(linhaSoma);
+	linhaSoma.appendChild(soma1);
+	linhaSoma.appendChild(soma2);
+	linhaSoma.appendChild(soma3);
 }
 
 async function compartilharPdf(chamador) {

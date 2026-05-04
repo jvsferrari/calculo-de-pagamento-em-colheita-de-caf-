@@ -201,3 +201,7 @@ div:has(h1),
 #resultados .botaoComposto p {
 	font-size: 6vw;
 }
+
+.quantidadeCafe {
+	display: none;
+}
