@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">Panha de café</string>
-    <string name="title_activity_main">Panha de café</string>
-    <string name="package_name">com.colheita.cafe</string>
-    <string name="custom_url_scheme">com.colheita.cafe</string>
-</resources>
