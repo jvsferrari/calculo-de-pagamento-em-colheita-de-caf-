@@ -280,32 +280,88 @@ async function compartilharPdf(chamador) {
 	const doc = new jsPDF();
 	doc.autoTable({ html: '#tabelaToda' });
 
-	// 1. Gera o Blob
-	const pdfBlob = doc.output('blob');
+	// Verifica se está rodando dentro do aplicativo Android (Capacitor)
+	const isApp = window.Capacitor && window.Capacitor.isNativePlatform();
 
-	// 2. Transforma o Blob em um objeto de Arquivo (File)
-	const arquivo = new File([pdfBlob], 'relatorio.pdf', {
-		type: 'application/pdf',
-	});
-
-	// 3. Verifica se o navegador suporta compartilhamento de arquivos
-	if (
-		navigator.canShare &&
-		navigator.canShare({ files: [arquivo] }) &&
-		chamador == 'compartilhar'
-	) {
+	if (isApp) {
+		// --- LÓGICA NATIVA DO APLICATIVO ANDROID ---
 		try {
-			await navigator.share({
-				files: [arquivo],
-				title: 'Relatório de Dados',
-				text: 'Segue em anexo a tabela exportada.',
-			});
-			console.log('Compartilhado com sucesso!');
+			const Filesystem = window.Capacitor.Plugins.Filesystem;
+			const Share = window.Capacitor.Plugins.Share;
+
+			// O Capacitor não entende "Blob", então transformamos o PDF em Base64
+			const base64Data = doc.output('datauristring').split(',')[1];
+
+			if (chamador === 'compartilhar') {
+				// Salva temporariamente no CACHE para poder enviar pelo WhatsApp
+				const resultado = await Filesystem.writeFile({
+					path: 'relatorio_pagamento.pdf',
+					data: base64Data,
+					directory: 'CACHE', // Usando string literal pois Directory enum pode não estar disponível globalmente
+				});
+
+				// Abre a tela de compartilhamento nativa do Android
+				await Share.share({
+					title: 'Relatório de Pagamento',
+					text: 'Segue em anexo a tabela do café.',
+					files: [resultado.uri], // Share plugin usa 'files' para URIs no Android
+				});
+			} else {
+				// Botão "Baixar": Tenta salvar direto na pasta DOCUMENTOS
+				try {
+					await Filesystem.writeFile({
+						path: 'Pagamento_Cafe_' + Date.now() + '.pdf',
+						data: base64Data,
+						directory: 'DOCUMENTS',
+					});
+					alert(
+						'PDF salvo com sucesso na pasta "Documentos" do seu celular!',
+					);
+				} catch (erroDireto) {
+					console.warn('Falha na escrita direta em DOCUMENTS (comum no Android 11+). Usando Share como fallback.');
+
+					// Fallback: Salva no CACHE e abre menu de compartilhar para o usuário escolher "Salvar no dispositivo"
+					const resultado = await Filesystem.writeFile({
+						path: 'relatorio_pagamento.pdf',
+						data: base64Data,
+						directory: 'CACHE',
+					});
+
+					await Share.share({
+						title: 'Salvar Relatório',
+						text: 'Seu celular bloqueou a gravação direta. Escolha "Salvar no dispositivo" ou "Salvar em arquivos" para baixar.',
+						files: [resultado.uri],
+					});
+				}
+			}
 		} catch (erro) {
-			console.log('O usuário cancelou o compartilhamento.', erro);
+			console.error('Erro no Capacitor:', erro);
+			alert('Erro ao processar o arquivo no app: ' + erro.message);
 		}
 	} else {
-		doc.save('relatorio.pdf');
+		// --- LÓGICA ORIGINAL DO NAVEGADOR / GITHUB PAGES ---
+		const pdfBlob = doc.output('blob');
+		const arquivo = new File([pdfBlob], 'relatorio.pdf', {
+			type: 'application/pdf',
+		});
+
+		if (
+			navigator.canShare &&
+			navigator.canShare({ files: [arquivo] }) &&
+			chamador == 'compartilhar'
+		) {
+			try {
+				await navigator.share({
+					files: [arquivo],
+					title: 'Relatório de Dados',
+					text: 'Segue em anexo a tabela exportada.',
+				});
+			} catch (erro) {
+				console.log('O usuário cancelou o compartilhamento.', erro);
+			}
+		} else {
+			doc.save('relatorio.pdf');
+		}
 	}
 	tabelaToda.classList.add('escondido');
 }
