@@ -242,7 +242,10 @@ function mostrarResultados() {
 		let total = document.createElement('td');
 		total.innerText = panhadores[i].total.toFixed(2);
 		let quantidadeCafe = document.createElement('td');
-		quantidadeCafe.innerText = `${panhadores[i].latoes} latões e ${panhadores[i].litros} litros`;
+		let quantidadeLitros = panhadores[i].litros % 60;
+		let quantidadeLatoes =
+			panhadores[i].latoes + Math.floor(panhadores[i].litros / 60);
+		quantidadeCafe.innerText = `${quantidadeLatoes} latões e ${quantidadeLitros} litros`;
 		quantidadeCafe.classList.add('quantidadeCafe');
 		linha.appendChild(total);
 		linha.appendChild(quantidadeCafe);
@@ -318,7 +321,9 @@ async function compartilharPdf(chamador) {
 						'PDF salvo com sucesso na pasta "Documentos" do seu celular!',
 					);
 				} catch (erroDireto) {
-					console.warn('Falha na escrita direta em DOCUMENTS (comum no Android 11+). Usando Share como fallback.');
+					console.warn(
+						'Falha na escrita direta em DOCUMENTS (comum no Android 11+). Usando Share como fallback.',
+					);
 
 					// Fallback: Salva no CACHE e abre menu de compartilhar para o usuário escolher "Salvar no dispositivo"
 					const resultado = await Filesystem.writeFile({
