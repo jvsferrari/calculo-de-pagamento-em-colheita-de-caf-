@@ -4,7 +4,8 @@ const calculadora = document.querySelector('#calculadora');
 const resultados = document.querySelector('#resultados');
 const numeros = document.querySelectorAll('.numero');
 const campoNome = document.querySelector('#campoNome');
-const campoCalculadora = document.querySelector('#campoCalculadora');
+const campoInteiro = document.querySelector('#campoInteiro');
+const campoDecimal = document.querySelector('#campoDecimal');
 const nomePronto = document.querySelector('#nomePronto');
 const numeroPronto = document.querySelector('#numeroPronto');
 const etapa = document.querySelector('#etapa');
@@ -26,16 +27,16 @@ let numPanhador = 0;
 let passo = 1;
 let panhadores = [];
 let precoDefinido = false;
-// preço novo??????????????????????????????? checkbox
+// preco novo??????????????????????????????? checkbox
 function novoPanhador() {
-	let nome = campoNome.value;
+	let nome = campoNome.innerText;
 	if (nome == null || nome == undefined || nome.trim() == '') {
 		nome = 'Nome não definido';
 	}
 	return {
 		index: numPanhador,
 		nome: nome,
-		preço: 0,
+		preco: 0,
 		latoes: 0,
 		litros: 0,
 		total: 0,
@@ -46,7 +47,7 @@ nomePronto.addEventListener('click', () => {
 	if (!panhadores[numPanhador]) {
 		panhadores[numPanhador] = novoPanhador();
 	} else {
-		let nome = campoNome.value.trim();
+		let nome = campoNome.innerText.trim();
 		panhadores[numPanhador].nome = nome === '' ? 'Nome não definido' : nome;
 	}
 	proximaPagina();
@@ -60,7 +61,7 @@ pular.addEventListener('click', () => {
 });
 
 borracha.addEventListener('click', () => {
-	campoCalculadora.value = campoCalculadora.value.slice(0, -1);
+	campoInteiro.innerText = campoInteiro.innerText.slice(0, -1);
 });
 
 finalizar.addEventListener('click', () => {
@@ -75,7 +76,7 @@ finalizar.addEventListener('click', () => {
 });
 
 adicionar.addEventListener('click', () => {
-	campoNome.value = '';
+	campoNome.innerText = '';
 
 	numPanhador++;
 	passo = 1;
@@ -102,30 +103,30 @@ numeroPronto.addEventListener('click', () => {
 	switch (passo) {
 		case 2:
 			try {
-				let expressao = campoCalculadora.value.trim();
-				panhadores[numPanhador].preço =
+				let expressao = campoInteiro.innerText.trim();
+				panhadores[numPanhador].preco =
 					expressao === '' ? 0 : math.evaluate(expressao);
 			} catch (erro) {
 				alert('Expressão matemática inválida! Corrija os valores.');
 				return;
 			}
 			mudarPreco.style.display = 'flex';
-			campoCalculadora.value = '';
+			campoInteiro.innerText = '';
 			break;
 		case 3:
 			try {
-				let expressao = campoCalculadora.value.trim();
+				let expressao = campoInteiro.innerText.trim();
 				panhadores[numPanhador].latoes =
 					expressao === '' ? 0 : math.evaluate(expressao);
 			} catch (erro) {
 				alert('Expressão matemática inválida! Corrija os valores.');
 				return;
 			}
-			campoCalculadora.value = '';
+			campoInteiro.innerText = '';
 			break;
 		case 4:
 			try {
-				let expressao = campoCalculadora.value.trim();
+				let expressao = campoInteiro.innerText.trim();
 				panhadores[numPanhador].litros =
 					expressao === '' ? 0 : math.evaluate(expressao);
 				precoDefinido = true;
@@ -133,7 +134,7 @@ numeroPronto.addEventListener('click', () => {
 				alert('Expressão matemática inválida! Corrija os valores.');
 				return;
 			}
-			campoCalculadora.value = '';
+			campoInteiro.innerText = '';
 			calcularResultados();
 			break;
 	}
@@ -142,7 +143,7 @@ numeroPronto.addEventListener('click', () => {
 
 numeros.forEach((tecla) => {
 	tecla.addEventListener('click', () => {
-		campoCalculadora.value += tecla.innerText;
+		campoInteiro.innerText += tecla.innerText;
 	});
 });
 
@@ -155,7 +156,7 @@ baixar.addEventListener('click', () => {
 });
 
 reiniciar.addEventListener('click', () => {
-	campoNome.value = '';
+	campoNome.innerText = '';
 	numPanhador++;
 	passo = 1;
 	nomes.style.display = 'flex';
@@ -184,12 +185,12 @@ function proximaPagina() {
 		case 1:
 			if (precoDefinido && numPanhador > 0) {
 				passo = 2;
-				panhadores[numPanhador].preço =
-					panhadores[numPanhador - 1].preço;
+				panhadores[numPanhador].preco =
+					panhadores[numPanhador - 1].preco;
 				proximaPagina();
 			} else {
-				campoCalculadora.placeholder = 'Preço por Latão R$/Latão';
-				etapa.innerText = 'Preço por Latão';
+				//campoInteiro.placeholder = 'R$';
+				etapa.innerText = panhadores[numPanhador].nome;
 				nomes.style.display = 'none';
 				calculadora.style.display = 'flex';
 				passo = 2;
@@ -197,8 +198,8 @@ function proximaPagina() {
 			}
 			break;
 		case 2:
-			campoCalculadora.placeholder = 'Latões';
-			etapa.innerText = 'Latões';
+			//campoInteiro.placeholder = 'Latões';
+			etapa.innerText = `${panhadores[numPanhador].preco} R$/latão`;
 			nomes.style.display = 'none';
 			calculadora.style.display = 'flex';
 			passo = 3;
@@ -207,8 +208,8 @@ function proximaPagina() {
 		case 3:
 			confirmar.style.display = 'none';
 			calculadora.style.display = 'flex';
-			campoCalculadora.placeholder = 'Litros';
-			etapa.innerText = 'Litros';
+			//campoInteiro.placeholder = 'Litros';
+			etapa.innerText = `${panhadores[numPanhador].latoes} latões`;
 			passo = 4;
 			window.history.pushState({ passo: passo }, '', '#' + 'litros');
 			break;
@@ -225,7 +226,7 @@ function calcularResultados() {
 	for (let i = 0; i < panhadores.length; i++) {
 		panhadores[i].total =
 			(panhadores[i].latoes + panhadores[i].litros / 60) *
-			panhadores[i].preço;
+			panhadores[i].preco;
 		if (isNaN(panhadores[i].total)) {
 			panhadores[i].total = 0;
 		}
@@ -394,18 +395,18 @@ function exibirPagina(passo) {
 			nomes.style.display = 'flex';
 			break;
 		case 2:
-			campoCalculadora.placeholder = 'Preço por Latão R$/Latão';
-			etapa.innerText = 'Preço por Latão';
+			//campoInteiro.placeholder = 'preco por Latão R$/Latão';
+			etapa.innerText = panhadores[numPanhador].nome;
 			calculadora.style.display = 'flex';
 			break;
 		case 3:
-			campoCalculadora.placeholder = 'Latões';
-			etapa.innerText = 'Latões';
+			//campoInteiro.placeholder = 'Latões';
+			etapa.innerText = `${panhadores[numPanhador].preco} R$/latão`;
 			calculadora.style.display = 'flex';
 			break;
 		case 4:
-			campoCalculadora.placeholder = 'Litros';
-			etapa.innerText = 'Litros';
+			//campoInteiro.placeholder = 'Litros';
+			etapa.innerText = `${panhadores[numPanhador].latoes} latões`;
 			calculadora.style.display = 'flex';
 			break;
 		case 5:

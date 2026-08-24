@@ -18,7 +18,7 @@
 				Nome <br />
 				do panhador
 			</h2>
-			<textarea id="campoNome" placeholder="Nome"></textarea>
+			<div id="campoNome" placeholder="Nome" contenteditable="true"></div>
 			<div class="botoes">
 				<div class="botaoComposto">
 					<a id="pular"><i class="fa-solid fa-forward"></i></a>
@@ -36,12 +36,20 @@
 		</div>
 
 		<div class="pagina" id="calculadora">
-			<h2 id="etapa"></h2>
+			<div id="etapa"></div>
 			<div class="visor">
-				<textarea
-					id="campoCalculadora"
-					placeholder="Preço por latão (R$/latão)"
-				></textarea>
+				<div id="campos">
+					<div
+						id="campoInteiro"
+						placeholder="R$"
+						contenteditable="true"
+					></div>
+					<div
+						id="campoDecimal"
+						placeholder=""
+						contenteditable="true"
+					></div>
+				</div>
 				<div class="desfazer">
 					<button id="borracha">
 						<i class="fa-solid fa-eraser"></i>

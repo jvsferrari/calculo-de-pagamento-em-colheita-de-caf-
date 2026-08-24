@@ -7,9 +7,10 @@
 
 .visor {
 	display: flex;
-	justify-content: space-between;
-	margin: 0 10px;
+	flex-direction: column;
+	align-items: center;
 	gap: 10px;
+	width: 100%;
 }
 
 html {
@@ -42,20 +43,21 @@ button {
 	justify-content: center;
 	align-items: center;
 	padding: 0;
-	font-size: clamp(12px, 10vw, 60px);
+	font-size: clamp(12px, 12vw, 60px);
 	cursor: pointer;
-	aspect-ratio: 1/1;
 }
 
-textarea {
-	padding: 40px 0;
-	width: 70%;
-	font-size: 8vw;
+#campos div {
+	font-size: 25vw;
 	color: #bc4749;
 	background-color: #f2e8cf;
-	height: 18dvh;
+	height: 20dvh;
 	border: 0;
 	border-radius: 30px;
+	width: 40%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 form {
@@ -71,6 +73,7 @@ form {
 .pagina {
 	flex-direction: column;
 	height: 100dvh;
+	width: 100dvw;
 	justify-content: space-around;
 }
 
@@ -186,7 +189,17 @@ body > div {
 }
 
 #campoNome {
-	height: 10dvh;
+	padding: 10px 10px;
+	width: 80%;
+	font-size: 10vw;
+	color: #bc4749;
+	background-color: #f2e8cf;
+	min-height: 20dvh;
+	border: 0;
+	border-radius: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 div:has(h1),
@@ -214,11 +227,25 @@ table.escondido .quantidadeCafe {
 
 .desfazer {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	justify-content: space-around;
-	width: 24dvw;
+	width: 90%;
+	margin: 10px 0;
+}
+
+.desfazer button {
+	height: 12dvw;
+	width: 45%;
+	border-radius: 15px;
+	font-size: 30px;
 }
 
 #confirmar {
 	align-items: center;
+}
+
+#campos {
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
 }
