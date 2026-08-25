@@ -8,7 +8,7 @@ const campoInteiro = document.querySelector('#campoInteiro');
 const campoDecimal = document.querySelector('#campoDecimal');
 const nomePronto = document.querySelector('#nomePronto');
 const numeroPronto = document.querySelector('#numeroPronto');
-const etapa = document.querySelector('#etapa');
+const anterior = document.querySelector('#anterior');
 const confirmar = document.querySelector('#confirmar');
 const finalizar = document.querySelector('#finalizar');
 const adicionar = document.querySelector('#adicionar');
@@ -190,7 +190,7 @@ function proximaPagina() {
 				proximaPagina();
 			} else {
 				//campoInteiro.placeholder = 'R$';
-				etapa.innerText = panhadores[numPanhador].nome;
+				//anterior.innerText = panhadores[numPanhador].nome;
 				nomes.style.display = 'none';
 				calculadora.style.display = 'flex';
 				passo = 2;
@@ -199,7 +199,7 @@ function proximaPagina() {
 			break;
 		case 2:
 			//campoInteiro.placeholder = 'Latões';
-			etapa.innerText = `${panhadores[numPanhador].preco} R$/latão`;
+			//anterior.innerText = `${panhadores[numPanhador].preco} R$/latão`;
 			nomes.style.display = 'none';
 			calculadora.style.display = 'flex';
 			passo = 3;
@@ -209,7 +209,7 @@ function proximaPagina() {
 			confirmar.style.display = 'none';
 			calculadora.style.display = 'flex';
 			//campoInteiro.placeholder = 'Litros';
-			etapa.innerText = `${panhadores[numPanhador].latoes} latões`;
+			//anterior.innerText = `${panhadores[numPanhador].latoes} latões`;
 			passo = 4;
 			window.history.pushState({ passo: passo }, '', '#' + 'litros');
 			break;
@@ -396,17 +396,17 @@ function exibirPagina(passo) {
 			break;
 		case 2:
 			//campoInteiro.placeholder = 'preco por Latão R$/Latão';
-			etapa.innerText = panhadores[numPanhador].nome;
+			//anterior.innerText = panhadores[numPanhador].nome;
 			calculadora.style.display = 'flex';
 			break;
 		case 3:
 			//campoInteiro.placeholder = 'Latões';
-			etapa.innerText = `${panhadores[numPanhador].preco} R$/latão`;
+			//anterior.innerText = `${panhadores[numPanhador].preco} R$/latão`;
 			calculadora.style.display = 'flex';
 			break;
 		case 4:
 			//campoInteiro.placeholder = 'Litros';
-			etapa.innerText = `${panhadores[numPanhador].latoes} latões`;
+			//anterior.innerText = `${panhadores[numPanhador].latoes} latões`;
 			calculadora.style.display = 'flex';
 			break;
 		case 5:

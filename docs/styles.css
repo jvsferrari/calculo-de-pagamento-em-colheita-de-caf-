@@ -37,8 +37,8 @@ button {
 	text-decoration: none;
 	color: #f2e8cf;
 	border-radius: 30px;
-	height: 24dvw;
-	width: 24dvw;
+	height: 22dvw;
+	width: 22dvw;
 	border: 0;
 	justify-content: center;
 	align-items: center;
@@ -47,7 +47,8 @@ button {
 	cursor: pointer;
 }
 
-#campos div {
+#campos div,
+#anterior div {
 	font-size: 25vw;
 	color: #bc4749;
 	background-color: #f2e8cf;
@@ -60,21 +61,36 @@ button {
 	justify-content: center;
 }
 
+#anterior div {
+	height: 13dvh;
+	width: 25%;
+	font-size: 15vw;
+	opacity: 0.6;
+}
+
+#anterior {
+	width: 100dvw;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
 form {
 	padding: 0;
 }
 
-.linha,
-.pagina {
+.linha {
 	display: flex;
 	justify-content: space-around;
+	gap: 15px;
 }
 
 .pagina {
+	display: flex;
 	flex-direction: column;
 	height: 100dvh;
 	width: 100dvw;
-	justify-content: space-around;
+	justify-content: space-between;
 }
 
 #resultados {
@@ -227,15 +243,15 @@ table.escondido .quantidadeCafe {
 
 .desfazer {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 	justify-content: space-around;
-	width: 90%;
+	gap: 10px;
 	margin: 10px 0;
 }
 
 .desfazer button {
-	height: 12dvw;
-	width: 45%;
+	height: 100%;
+	width: 20dvw;
 	border-radius: 15px;
 	font-size: 30px;
 }
@@ -248,4 +264,25 @@ table.escondido .quantidadeCafe {
 	display: flex;
 	justify-content: space-around;
 	width: 100%;
+}
+
+.campo {
+	overflow: scroll;
+}
+
+#teclado {
+	display: flex;
+	justify-content: space-evenly;
+	height: 60%;
+}
+
+#numeros {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+#calculadora {
+	justify-content: end;
+	gap: 20px;
 }
