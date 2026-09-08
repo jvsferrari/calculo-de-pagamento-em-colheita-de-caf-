@@ -9,6 +9,7 @@ const campoDecimal = document.querySelector('#campoDecimal');
 const nomePronto = document.querySelector('#nomePronto');
 const numeroPronto = document.querySelector('#numeroPronto');
 const anterior = document.querySelector('#anterior');
+const nomeAtual = document.querySelector('#nomeAtual');
 const confirmar = document.querySelector('#confirmar');
 const finalizar = document.querySelector('#finalizar');
 const adicionar = document.querySelector('#adicionar');
@@ -22,6 +23,7 @@ const paginas = document.querySelectorAll('.pagina');
 const tabelaToda = document.querySelector('#tabelaToda');
 const mudarPreco = document.querySelector('#mudarPreco');
 const voltar = document.querySelectorAll('.voltar');
+const etapa = document.querySelectorAll('#etapa');
 
 let numPanhador = 0;
 let passo = 1;
@@ -189,6 +191,7 @@ function proximaPagina() {
 					panhadores[numPanhador - 1].preco;
 				proximaPagina();
 			} else {
+				nomeAtual.innerText = panhadores[numPanhador].nome;
 				//campoInteiro.placeholder = 'R$';
 				//anterior.innerText = panhadores[numPanhador].nome;
 				nomes.style.display = 'none';
